@@ -2,15 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AttandanceSystem.Pages.HomePage"
+             xmlns:vm="clr-namespace:AttandanceSystem.Models.ViewModels"
+             x:DataType="vm:HomePageViewModel"
              Title="HomePage">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to Your Attendance App"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-
-
-
+         Text="Welcome to Your Attendance App"
+         VerticalOptions="Center" 
+         HorizontalOptions="Center" />
         <Button
          Margin="0,20,0,0"
          Text="Logout"
@@ -20,25 +19,36 @@
          HorizontalOptions="Center"
          />
         <Button
-          x:Name="Check_inButton"
+          Command="{Binding MarkCheckInCommand}"
           Margin="0,20,0,0"
           Text="Check-In"
-          Clicked="OnCheckInClicked"
+         
           VerticalOptions="CenterAndExpand" 
           HorizontalOptions="Center"
           />
         <Button
-          x:Name="Check_outButton"
-          Margin="0,20,0,0"
-          Text="Check-Out"
-          Clicked="OnCheckOutClicked"
-          VerticalOptions="CenterAndExpand" 
-          HorizontalOptions="Center"
+            Command="{Binding MarkCheckOutCommand}"
+            Margin="0,20,0,0"
+             Text="Check-Out"
+             
+            VerticalOptions="CenterAndExpand" 
+             HorizontalOptions="Center"
           />
 
-        <Label
-            x:Name="Location"
-            Text="No Location Data Found"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="Latitude" />
+            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Latitude}" />
+            <Label Grid.Row="1" Grid.Column="0" Text="Longitude" />
+            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Longitude}" />
+        </Grid>
 
 
 

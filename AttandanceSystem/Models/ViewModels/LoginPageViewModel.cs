@@ -30,9 +30,10 @@ namespace AttandanceSystem.Models.ViewModels
         [RelayCommand]
         private async Task GetUserInfo()
         {
+            Platforms.KeyboardHelper.HideKeyboard();
             var res = await _loginApiService.LoginUserInfo(username, password);
 
-            if (res != null)
+            if (res.Message != "User not found")
             {
                 await SecureStorage.SetAsync("employeeId", res.EmployeeId.ToString());
                 await SecureStorage.SetAsync("name", res.Name);
@@ -42,11 +43,16 @@ namespace AttandanceSystem.Models.ViewModels
                 await SecureStorage.SetAsync("shedLocation_Lat", res.ShedLocation_Lat.ToString());
                 await SecureStorage.SetAsync("shedLocation_Long", res.ShedLocation_Long.ToString());
 
+                //go to home page if user is found
                 await Shell.Current.GoToAsync("home");
+            }
+            else if (res.Message == "User not found")
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "UserNot Found", "OK");
             }
             else
             {
-                //nofity user that login failed
+                await Application.Current.MainPage.DisplayAlert("Error", "", "OK");
             }
 
 

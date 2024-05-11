@@ -9,6 +9,8 @@ namespace AttandanceSystem.Models.ApiModels
 {
     internal class LoginApiResponse
     {
+        [JsonPropertyName("message")]
+        public string Message { get; set; }
         [JsonPropertyName("employeeId")]
         public int EmployeeId { get; set; }
         [JsonPropertyName("name")]
