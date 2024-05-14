@@ -10,12 +10,13 @@ namespace AttandanceSystem.Services
         public LoginApiService()
         {
             _httpClient = new HttpClient { BaseAddress = new Uri(Constants.LoginUrl) };
+            _httpClient.Timeout = TimeSpan.FromSeconds(7);
         }
         public async Task<LoginApiResponse?> LoginUserInfo(string username, string password)
         {
             try
             {
-                var content = JsonContent.Create(new { name = username, password = password });
+                var content = JsonContent.Create(new { name = username, password });
 
                 if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 {
@@ -25,7 +26,6 @@ namespace AttandanceSystem.Services
             }
             catch (Exception)
             {
-
                 Console.WriteLine("Error");
                 return null;
             }

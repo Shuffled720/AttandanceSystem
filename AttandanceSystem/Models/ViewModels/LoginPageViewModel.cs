@@ -30,29 +30,39 @@ namespace AttandanceSystem.Models.ViewModels
         [RelayCommand]
         private async Task GetUserInfo()
         {
-            Platforms.KeyboardHelper.HideKeyboard();
-            var res = await _loginApiService.LoginUserInfo(username, password);
+            //Platforms.KeyboardHelper.HideKeyboard();
+            try
+            {
 
-            if (res.Message != "User not found")
-            {
-                await SecureStorage.SetAsync("employeeId", res.EmployeeId.ToString());
-                await SecureStorage.SetAsync("name", res.Name);
-                await SecureStorage.SetAsync("lastName", res.LastName);
-                await SecureStorage.SetAsync("password", res.Password);
-                await SecureStorage.SetAsync("shedName", res.ShedName);
-                await SecureStorage.SetAsync("shedLocation_Lat", res.ShedLocation_Lat.ToString());
-                await SecureStorage.SetAsync("shedLocation_Long", res.ShedLocation_Long.ToString());
 
-                //go to home page if user is found
-                await Shell.Current.GoToAsync("home");
+                var res = await _loginApiService.LoginUserInfo(username, password);
+
+                if (res.Message != "User not found")
+                {
+                    await SecureStorage.SetAsync("employeeId", res.EmployeeId.ToString());
+                    await SecureStorage.SetAsync("name", res.Name);
+                    await SecureStorage.SetAsync("lastName", res.LastName);
+                    await SecureStorage.SetAsync("password", res.Password);
+                    await SecureStorage.SetAsync("shedName", res.ShedName);
+                    await SecureStorage.SetAsync("shedLocation_Lat", res.ShedLocation_Lat.ToString());
+                    await SecureStorage.SetAsync("shedLocation_Long", res.ShedLocation_Long.ToString());
+
+                    //go to home page if user is found
+                    await Shell.Current.GoToAsync("///home",true);
+                }
+                else if (res.Message == "User not found")
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "UserNot Found", "OK");
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "", "OK");
+                }
             }
-            else if (res.Message == "User not found")
+            catch (Exception)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "UserNot Found", "OK");
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "", "OK");
+
+                await Application.Current.MainPage.DisplayAlert("Error", "Internal Server Error", "Try afte some time!");
             }
 
 

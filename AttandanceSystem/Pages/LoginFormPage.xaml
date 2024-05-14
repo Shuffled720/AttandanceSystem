@@ -10,13 +10,15 @@
 
     <VerticalStackLayout Margin="20">
         <Label Text="Login" FontSize="Large" HorizontalTextAlignment="Center" />
+        <Image Source="train_logo.png"
+               HeightRequest="185"
+               Aspect="AspectFit"
+               SemanticProperties.Description="dot net bot in a race car number eight" />
 
         <Entry  Placeholder="Username" Text="{Binding Username}"/>
         <Entry  Text="{Binding Password}" Placeholder="Password" IsPassword="True"/>
 
         <Button Text="Login" Command="{Binding GetUserInfoCommand}"/>
-
-        <Label Text="Forgot Password?" TextColor="Blue" HorizontalTextAlignment="Center" Margin="10,0" />
     </VerticalStackLayout>
 </ContentPage>
     

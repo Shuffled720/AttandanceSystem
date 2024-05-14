@@ -1,10 +1,6 @@
 ﻿using AttandanceSystem.Models.ApiModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AttandanceSystem.Services
 {
@@ -14,13 +10,13 @@ namespace AttandanceSystem.Services
         public AttendanceApiService()
         {
             _httpClient = new HttpClient { BaseAddress = new Uri(Constants.AttendanceUrl) };
+            _httpClient.Timeout = TimeSpan.FromSeconds(7);
         }
-
         public async Task<AttendanceApiResponse?> PostAttendanceInfo(int employeeId,string status)
         {
             try
             {
-                var content = JsonContent.Create(new { id = employeeId, status = status });
+                var content = JsonContent.Create(new { id = employeeId,  status });
 
                 if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 {
@@ -30,7 +26,6 @@ namespace AttandanceSystem.Services
             }
             catch (Exception)
             {
-
                 Console.WriteLine("Error");
                 return null;
             }

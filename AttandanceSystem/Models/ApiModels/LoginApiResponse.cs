@@ -22,9 +22,9 @@ namespace AttandanceSystem.Models.ApiModels
         [JsonPropertyName("shedName")]
         public string ShedName { get; set; }
         [JsonPropertyName("shedLocation_Lat")]
-        public int ShedLocation_Lat { get; set; }
+        public double ShedLocation_Lat { get; set; }
         [JsonPropertyName("shedLocation_Long")]
-        public int ShedLocation_Long { get; set; }
+        public double ShedLocation_Long { get; set; }
     }
 
 

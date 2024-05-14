@@ -7,10 +7,9 @@ namespace AttandanceSystem
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute("loading", typeof(LoadingPage));
             Routing.RegisterRoute("home", typeof(HomePage));
-            Routing.RegisterRoute("login",typeof(LoginFormPage));
+            Routing.RegisterRoute("login", typeof(LoginFormPage));
         }
-        
+
     }
 }

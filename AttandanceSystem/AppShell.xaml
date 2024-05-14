@@ -5,17 +5,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:AttandanceSystem"
     xmlns:pages="clr-namespace:AttandanceSystem.Pages"
-    Shell.FlyoutBehavior="Disabled"
+    BackgroundColor="{StaticResource Primary}"
+    FlyoutBehavior="Disabled"
     Title="AttandanceSystem">
 
-    <ShellContent
-        ContentTemplate="{DataTemplate pages:LoadingPage}"
-        Route="loading" />
+    
     <ShellContent
         ContentTemplate="{DataTemplate pages:HomePage}"
         Route="home"/>
     <ShellContent
         ContentTemplate="{DataTemplate pages:LoginFormPage}"
-        Route="///login"/>
+        Route="login"/>
 
 </Shell>
