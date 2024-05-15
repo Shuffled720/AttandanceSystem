@@ -5,22 +5,26 @@ namespace AttandanceSystem.Pages;
 public partial class HomePage : ContentPage
 {
     public bool _isCheckingLocation;
+
     public HomePage()
     {
         InitializeComponent();
         BindingContext = new HomePageViewModel();
+
     }
     protected override bool OnBackButtonPressed()
     {
         Application.Current.Quit();
         return true;
     }
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        if(SecureStorage.GetAsync("employeeId").Result == null)
+        if (SecureStorage.GetAsync("employeeId").Result == null)
         {
             Shell.Current.GoToAsync("login");
         }
+        UserName.Text = "Welcome "+await SecureStorage.GetAsync("name");
+        Shedname.Text = await SecureStorage.GetAsync("shedName");
     }
     private async void LogoutButton_Clicked(object sender, EventArgs e)
     {
@@ -30,6 +34,6 @@ public partial class HomePage : ContentPage
             await Shell.Current.GoToAsync("//login");
         }
     }
-   
+
 }
 

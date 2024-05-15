@@ -6,8 +6,14 @@
              x:DataType="vm:HomePageViewModel"
              Title="HomePage">
     <VerticalStackLayout>
+
         <Label 
-         Text="Welcome to Your Attendance App"
+         x:Name="UserName"
+         
+         VerticalOptions="Center" 
+         HorizontalOptions="Center" />
+        <Label 
+            x:Name="Shedname"
          VerticalOptions="Center" 
          HorizontalOptions="Center" />
         <Button
