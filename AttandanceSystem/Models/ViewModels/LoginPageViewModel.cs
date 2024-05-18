@@ -1,13 +1,7 @@
 ﻿using AttandanceSystem.Services;
-using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AttandanceSystem.Models.ViewModels
 {
@@ -30,25 +24,22 @@ namespace AttandanceSystem.Models.ViewModels
         [RelayCommand]
         private async Task GetUserInfo()
         {
-            //Platforms.KeyboardHelper.HideKeyboard();
             try
             {
-
-
                 var res = await _loginApiService.LoginUserInfo(username, password);
-
                 if (res.Message != "User not found")
                 {
-                    await SecureStorage.SetAsync("employeeId", res.EmployeeId.ToString());
-                    await SecureStorage.SetAsync("name", res.Name);
-                    await SecureStorage.SetAsync("lastName", res.LastName);
-                    await SecureStorage.SetAsync("password", res.Password);
-                    await SecureStorage.SetAsync("shedName", res.ShedName);
-                    await SecureStorage.SetAsync("shedLocation_Lat", res.ShedLocation_Lat.ToString());
-                    await SecureStorage.SetAsync("shedLocation_Long", res.ShedLocation_Long.ToString());
-
-                    //go to home page if user is found
-                    await Shell.Current.GoToAsync("///home",true);
+                    await SecureStorage.SetAsync("userId", res.ATTENDANCE_USER_ID);
+                    await SecureStorage.SetAsync("password", res.Attendance_PASSWORD);
+                    await SecureStorage.SetAsync("shedId", res.SHED_ID.ToString());
+                    await SecureStorage.SetAsync("shedName", res.SHED_NAME);
+                    await SecureStorage.SetAsync("shedInchargeName", res.Shed_Incharge_Name);
+                    await SecureStorage.SetAsync("shedInchargeAddressOffice", res.Shed_Incharge_Address_Office);
+                    await SecureStorage.SetAsync("addressHome", res.Address_Home);
+                    await SecureStorage.SetAsync("adminTag", res.Admin_tag.ToString());
+                    await SecureStorage.SetAsync("shedLatitude", res.SHED_LATITUDE.ToString());
+                    await SecureStorage.SetAsync("shedLongitude", res.SHED_LONGITUDE.ToString());
+                    await Shell.Current.GoToAsync("///home", true);
                 }
                 else if (res.Message == "User not found")
                 {

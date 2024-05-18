@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
+
 
 namespace AttandanceSystem.Models.ApiModels
 {
@@ -11,20 +7,34 @@ namespace AttandanceSystem.Models.ApiModels
     {
         [JsonPropertyName("message")]
         public string Message { get; set; }
-        [JsonPropertyName("employeeId")]
-        public int EmployeeId { get; set; }
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-        [JsonPropertyName("lastName")]
-        public string LastName { get; set; }
-        [JsonPropertyName("password")]
-        public string Password { get; set; }
-        [JsonPropertyName("shedName")]
-        public string ShedName { get; set; }
-        [JsonPropertyName("shedLocation_Lat")]
-        public double ShedLocation_Lat { get; set; }
-        [JsonPropertyName("shedLocation_Long")]
-        public double ShedLocation_Long { get; set; }
+        [JsonPropertyName("SHED_ID")]
+        public int SHED_ID { get; set; }
+        [JsonPropertyName("SHED_NAME")]
+        public string SHED_NAME { get; set; }
+        [JsonPropertyName("Shed_Incharge_Name")]
+        public string Shed_Incharge_Name { get; set; }
+        [JsonPropertyName("Shed_Incharge_Address_Office")]
+        public string Shed_Incharge_Address_Office { get; set; }
+        [JsonPropertyName("Address_Home")]
+        public string Address_Home { get; set; }
+        [JsonPropertyName("ATTENDANCE_USER_ID")]
+        public string ATTENDANCE_USER_ID { get; set; }
+        [JsonPropertyName("Attendance_PASSWORD")]
+        public string Attendance_PASSWORD { get; set; }
+        [JsonPropertyName("Admin_tag")]
+        public int Admin_tag { get; set; }
+        [JsonPropertyName("SHED_LATITUDE")]
+        public float SHED_LATITUDE { get; set; }
+        [JsonPropertyName("SHED_LONGITUDE")]
+        public float SHED_LONGITUDE { get; set; }
+    }
+
+
+
+    public class Rootobject
+    {
+
+
     }
 
 

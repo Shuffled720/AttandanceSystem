@@ -12,11 +12,11 @@ namespace AttandanceSystem.Services
             _httpClient = new HttpClient { BaseAddress = new Uri(Constants.AttendanceUrl) };
             _httpClient.Timeout = TimeSpan.FromSeconds(7);
         }
-        public async Task<AttendanceApiResponse?> PostAttendanceInfo(int employeeId,string status)
+        public async Task<AttendanceApiResponse?> PostAttendanceInfo(string employeeId, string status)
         {
             try
             {
-                var content = JsonContent.Create(new { id = employeeId,  status });
+                var content = JsonContent.Create(new { id = employeeId, status });
 
                 if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 {

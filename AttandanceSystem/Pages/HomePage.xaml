@@ -7,15 +7,54 @@
              Title="HomePage">
     <VerticalStackLayout>
 
-        <Label 
-         x:Name="UserName"
-         
-         VerticalOptions="Center" 
-         HorizontalOptions="Center" />
-        <Label 
-            x:Name="Shedname"
-         VerticalOptions="Center" 
-         HorizontalOptions="Center" />
+
+        <!-- User Name -->
+        <Label x:Name="UserName" 
+                   FontSize="24" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" 
+                   Margin="0,20,0,0"/>
+        <Label x:Name="shedName" 
+           FontSize="24" 
+           FontAttributes="Bold" 
+           HorizontalOptions="Center" 
+           Margin="0,20,0,0"/>
+
+        <!-- User Description -->
+        <!--<Label Text="Software Developer with a passion for creating innovative solutions and learning new technologies. Experienced in .NET, MAUI, and mobile app development." 
+                   FontSize="16" 
+                   HorizontalOptions="Center" 
+                   HorizontalTextAlignment="Center" 
+                   Margin="20,10"/>-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button
+                Grid.Row="0"
+                Grid.Column="0"
+            Command="{Binding MarkCheckInCommand}"
+            Margin="0,20,0,0"
+            Text="Punch-In" 
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="Center"
+            />
+            <Button
+                Grid.Row="0"
+                Grid.Column="1"
+             Command="{Binding MarkCheckOutCommand}"
+             Margin="0,20,0,0"
+             Text="Punch-Out"
+             VerticalOptions="CenterAndExpand" 
+             HorizontalOptions="Center"
+             />
+        </Grid>
         <Button
          Margin="0,20,0,0"
          Text="Logout"
@@ -24,24 +63,10 @@
          VerticalOptions="CenterAndExpand" 
          HorizontalOptions="Center"
          />
-        <Button
-          Command="{Binding MarkCheckInCommand}"
-          Margin="0,20,0,0"
-          Text="Check-In"
-         
-          VerticalOptions="CenterAndExpand" 
-          HorizontalOptions="Center"
-          />
-        <Button
-            Command="{Binding MarkCheckOutCommand}"
-            Margin="0,20,0,0"
-             Text="Check-Out"
-             
-            VerticalOptions="CenterAndExpand" 
-             HorizontalOptions="Center"
-          />
 
-        <Grid>
+
+
+        <Grid Padding="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -50,9 +75,9 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Text="Latitude" />
+            <Label Grid.Row="0" Grid.Column="0" Text="Current Latitude:" />
             <Label Grid.Row="0" Grid.Column="1" Text="{Binding Latitude}" />
-            <Label Grid.Row="1" Grid.Column="0" Text="Longitude" />
+            <Label Grid.Row="1" Grid.Column="0" Text="Current Longitude:" />
             <Label Grid.Row="1" Grid.Column="1" Text="{Binding Longitude}" />
         </Grid>
 

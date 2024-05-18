@@ -1,12 +1,7 @@
 ﻿using AttandanceSystem.Services;
-using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace AttandanceSystem.Models.ViewModels
 {
@@ -29,7 +24,7 @@ namespace AttandanceSystem.Models.ViewModels
             if (await Application.Current.MainPage.DisplayAlert("Are you sure?", "You will be logged out.", "Yes", "No"))
             {
                 SecureStorage.RemoveAll();
-                await Shell.Current.GoToAsync("//login",true);
+                await Shell.Current.GoToAsync("//login", true);
             }
         }
         [RelayCommand]
@@ -88,10 +83,13 @@ namespace AttandanceSystem.Models.ViewModels
                             await MarkAttendance("OUT");
 
                         }
-                        catch
+                        catch (Exception e)
                         {
-                            await Application.Current.MainPage.DisplayAlert("Insternal Server Error", "You are not Punched OUT", "OK");
+                            Console.WriteLine(e.Message);
+                            await Application.Current.MainPage.DisplayAlert("Error", "You are not Punched OUT", "OK");
+                            Console.WriteLine();
                         }
+
                     }
                     else
                     {
@@ -108,7 +106,7 @@ namespace AttandanceSystem.Models.ViewModels
 
         private async Task MarkAttendance(string status)
         {
-            int id = Convert.ToInt32(SecureStorage.GetAsync("employeeId").Result);
+            string id = SecureStorage.GetAsync("userId").Result;
             var res = await _attendanceApiService.PostAttendanceInfo(id, status);
             //Console.WriteLine(res?.Message);
             if (res?.Message == "duplicate record")
@@ -119,18 +117,15 @@ namespace AttandanceSystem.Models.ViewModels
             {
                 await Application.Current.MainPage.DisplayAlert("Success", $"You are Punched {status}", "OK");
             }
-
-
         }
         private bool CheckLocation()
         {
-            double shedLocation_Lat = Convert.ToDouble(SecureStorage.GetAsync("shedLocation_Lat").Result);
-            double shedLocation_Long = Convert.ToDouble(SecureStorage.GetAsync("shedLocation_Long").Result);
+            double shedLocation_Lat = Convert.ToDouble(SecureStorage.GetAsync("shedLatitude").Result);
+            double shedLocation_Long = Convert.ToDouble(SecureStorage.GetAsync("shedLongitude").Result);
             double userLocation_Lat = Convert.ToDouble(Latitude);
             double userLocation_Long = Convert.ToDouble(Longitude);
             double distance = Distance(shedLocation_Lat, shedLocation_Long, userLocation_Lat, userLocation_Long);
             Console.WriteLine(distance);
-            //return true;
             //here distance is in kilometers
             if (distance < 1)
             {
