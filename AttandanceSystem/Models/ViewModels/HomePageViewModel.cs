@@ -154,7 +154,7 @@ namespace AttandanceSystem.Models.ViewModels
         }
         private bool CheckLocation()
         {
-            return true;
+            return true; // comment this section before running in production or testing the gps location ability 
             double shedLocation_Lat = Convert.ToDouble(SecureStorage.GetAsync("shedLatitude").Result);
             double shedLocation_Long = Convert.ToDouble(SecureStorage.GetAsync("shedLongitude").Result);
             double userLocation_Lat = Convert.ToDouble(Latitude);
