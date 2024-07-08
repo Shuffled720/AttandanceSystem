@@ -19,12 +19,12 @@ public partial class HomePage : ContentPage
     }
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        if (SecureStorage.GetAsync("userId").Result == null)
+        if (SecureStorage.GetAsync("shedIncharge_StaffNo").Result == null)
         {
             Shell.Current.GoToAsync("login");
         }
-        UserName.Text = "Welcome " + await SecureStorage.GetAsync("userId");
-        shedName.Text ="Shed:" + await SecureStorage.GetAsync("shedName");
+        UserName.Text = "Welcome " + await SecureStorage.GetAsync("attendanceUserId");
+        shedName.Text ="Shed:" + await SecureStorage.GetAsync("shed_Name");
     }
     private async void LogoutButton_Clicked(object sender, EventArgs e)
     {

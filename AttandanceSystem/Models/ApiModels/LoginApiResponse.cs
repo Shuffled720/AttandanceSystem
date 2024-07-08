@@ -7,34 +7,40 @@ namespace AttandanceSystem.Models.ApiModels
     {
         [JsonPropertyName("message")]
         public string Message { get; set; }
-        [JsonPropertyName("SHED_ID")]
-        public int SHED_ID { get; set; }
-        [JsonPropertyName("SHED_NAME")]
-        public string SHED_NAME { get; set; }
-        [JsonPropertyName("Shed_Incharge_Name")]
-        public string Shed_Incharge_Name { get; set; }
-        [JsonPropertyName("Shed_Incharge_Address_Office")]
-        public string Shed_Incharge_Address_Office { get; set; }
-        [JsonPropertyName("Address_Home")]
-        public string Address_Home { get; set; }
-        [JsonPropertyName("ATTENDANCE_USER_ID")]
-        public string ATTENDANCE_USER_ID { get; set; }
-        [JsonPropertyName("Attendance_PASSWORD")]
-        public string Attendance_PASSWORD { get; set; }
-        [JsonPropertyName("Admin_tag")]
-        public int Admin_tag { get; set; }
-        [JsonPropertyName("SHED_LATITUDE")]
-        public float SHED_LATITUDE { get; set; }
-        [JsonPropertyName("SHED_LONGITUDE")]
-        public float SHED_LONGITUDE { get; set; }
+        [JsonPropertyName("shedIncharge_StaffNo")]
+        public string SedIncharge_StaffNo { get; set; }
+        [JsonPropertyName("contactNo")]
+        public string ContactNo { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+        [JsonPropertyName("attendanceUserId")]
+        public string AttendanceUserId { get; set; }
+        [JsonPropertyName("adminTag")]
+        public bool AdminTag { get; set; }
+        [JsonPropertyName("zonalRLY")]
+        public string ZonalRLY { get; set; }
+        [JsonPropertyName("shed_Name")]
+        public string Shed_Name { get; set; }
+        [JsonPropertyName("shed_Latitude")]
+        public string Shed_Latitude { get; set; }
+        [JsonPropertyName("shed_Longitude")]
+        public string Shed_Longitude { get; set; }
     }
+
 
 
 
     public class Rootobject
     {
-
-
+        public string shedIncharge_StaffNo { get; set; }
+        public string contactNo { get; set; }
+        public string name { get; set; }
+        public string attendanceUserId { get; set; }
+        public bool adminTag { get; set; }
+        public string zonalRLY { get; set; }
+        public string shed_Name { get; set; }
+        public string shed_Latitude { get; set; }
+        public string shed_Longitude { get; set; }
     }
 
 

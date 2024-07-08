@@ -44,7 +44,7 @@ namespace AttandanceSystem.Models.ViewModels
                     {
                         try
                         {
-                            await MarkAttendance("IN");
+                            await MarkAttendance("PunchIn");
 
                         }
                         catch
@@ -80,7 +80,7 @@ namespace AttandanceSystem.Models.ViewModels
                     {
                         try
                         {
-                            await MarkAttendance("OUT");
+                            await MarkAttendance("PunchOut");
 
                         }
                         catch (Exception e)
@@ -106,20 +106,55 @@ namespace AttandanceSystem.Models.ViewModels
 
         private async Task MarkAttendance(string status)
         {
-            string id = SecureStorage.GetAsync("userId").Result;
+            string id = SecureStorage.GetAsync("attendanceUserId").Result;
             var res = await _attendanceApiService.PostAttendanceInfo(id, status);
             //Console.WriteLine(res?.Message);
-            if (res?.Message == "duplicate record")
+            if (res.Message == "User not found")
             {
-                await Application.Current.MainPage.DisplayAlert("Error", $"You have already Punched {status}", "OK");
+
+                await Application.Current.MainPage.DisplayAlert("Error", "User not found", "OK");
+            }
+            else if (res.Message == "Shed not found")
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Shed not found", "OK");
+
+            }
+            else if (res.Message == "PunchOut not done")
+            {
+
+                await Application.Current.MainPage.DisplayAlert("Error", "PunchOut not done", "OK");
+            }
+            else if (res.Message == "PunchIn not found")
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "PunchIn not found", "OK");
+            }
+            else if (res.Message == "PunchOut already done")
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "PunchOut already done", "OK");
+            }
+            else if (res.Message == "Invalid Status")
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Invalid Status", "OK");
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Success", $"You are Punched {status}", "OK");
+                if(status== "PunchIn")
+                     await Application.Current.MainPage.DisplayAlert("Success", $"You are Punched In", "OK");
+                else if(status== "PunchOut")
+                    await Application.Current.MainPage.DisplayAlert("Success", $"You are Punched Out", "OK");
             }
+            //if (res?.Message == "duplicate record")
+            //{
+            //    await Application.Current.MainPage.DisplayAlert("Error", $"You have already Punched {status}", "OK");
+            //}
+            //else
+            //{
+            //    await Application.Current.MainPage.DisplayAlert("Success", $"You are Punched {status}", "OK");
+            //}
         }
         private bool CheckLocation()
         {
+            return true;
             double shedLocation_Lat = Convert.ToDouble(SecureStorage.GetAsync("shedLatitude").Result);
             double shedLocation_Long = Convert.ToDouble(SecureStorage.GetAsync("shedLongitude").Result);
             double userLocation_Lat = Convert.ToDouble(Latitude);

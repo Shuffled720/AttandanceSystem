@@ -16,7 +16,7 @@ namespace AttandanceSystem.Services
         {
             try
             {
-                var content = JsonContent.Create(new { id = employeeId, status });
+                var content = JsonContent.Create(new { UserId = employeeId, Status=status });
 
                 if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 {
